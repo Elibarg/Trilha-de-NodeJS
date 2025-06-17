@@ -17,3 +17,18 @@ let games=[
 app.get ('/',(req,res) =>
     res.json(games)
  );
+
+ app.use(express.json());
+ app.post("/novogame",(req,res)=>
+ {
+    let title = req.body.title;
+    let studio = req.body.studio;
+    let price = req.body.price;
+ 
+    console.log(title);
+    console.log(studio);
+    console.log(price);
+    let newGame ={title,studio,price};
+    games.push(newGame);
+    res.send("OK");
+ });
