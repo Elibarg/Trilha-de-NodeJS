@@ -1,0 +1,4 @@
+npm init -y
+npm install express
+npm install -g nodemon
+npm install --save-dev nodemon
