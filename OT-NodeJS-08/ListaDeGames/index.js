@@ -31,7 +31,7 @@ app.post("/novogame",(req,res)=>
     return res.json(games);
 });
 
-app.delete("/novogame",(req,res)=>
+app.delete("/index",(req,res)=>
     {
         const{index} = req.params;
         games.splice(index,1);

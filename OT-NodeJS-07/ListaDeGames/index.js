@@ -19,7 +19,7 @@ app.get ('/',(req,res) =>
  );
  app.use(express.json());
 
-app.post("/novogame",(req,res)=>
+app.post("/novogame/:index",(req,res)=>
 {
     const{index} = req.params;
     let title = req.body.title;
@@ -29,12 +29,4 @@ app.post("/novogame",(req,res)=>
     games[index] = {title,studio,price};
 
     return res.json(games);
-
-    console.log(title);
-    console.log(studio);
-    console.log(price);
-
-    let newGame ={title,studio,price};
-    
-    res.send("OK")
 });
