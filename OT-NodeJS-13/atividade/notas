@@ -1,0 +1,5 @@
+Buscar todos os games: http://localhost:8080/games
+Buscar games por título: http://localhost:8080/games?busca=zelda
+game por ID existente: http://localhost:8080/games/1
+Testar tratamento de erro (ID não existe): http://localhost:8080/games/99
+Testar tratamento de erro (ID inválido): http://localhost:8080/games/abc
