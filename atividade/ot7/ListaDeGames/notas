@@ -1,6 +1,8 @@
 // Get: http://localhost:5000/games
 // Post: http://localhost:5000/novogame
 // put: http://localhost:5000/novogame/5
+// npx nodemon index.js
+
 
 //{
 //  "title": "Sekiro: Shadow",

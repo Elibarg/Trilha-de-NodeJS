@@ -1,0 +1,4 @@
+// post http://localhost:3000/cars/
+// put  http://localhost:3000/cars/update/0
+// delete http://localhost:3000/cars/delete/0
+// npx nodemon index.js

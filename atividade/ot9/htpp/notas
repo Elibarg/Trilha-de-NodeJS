@@ -1,0 +1,17 @@
+// post http://localhost:3000/carros
+// put  http://localhost:3000/carros/1
+// delete http://localhost:3000/carros/2
+// npx nodemon index.js
+//post
+// Corpo (Body > JSON):
+//{
+//  "nome": "Polo",
+//  "marca": "Volkswagen",
+//  "preco": 90000
+//}
+// Atualize um carro:
+//{
+//  "nome": "Corolla Cross",
+//  "marca": "Toyota",
+//  "preco": 140000
+//}

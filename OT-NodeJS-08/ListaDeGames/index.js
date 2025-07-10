@@ -1,40 +1,66 @@
-import express from "express";
-
+// Importa o express
+const express = require('express');
 const app = express();
 
-app.listen(3080, () =>
-    console.log("Servidor iniciado na porta http://localhost:3080")
-);
+// Define a porta que será usada
+const PORT = 5000;
 
-let games=[
-    {title:"Sea of Thieves",studio:"Rare",price:"30"},
-    {title:"WOW",studio:"Blizzard",price:"120"},
-    {title:"Valorant",studio:"Riot",price:"0"},
-    {title:"COD",studio:"Activision",price:"200"},
-    {title:"Minecreft",studio:"Mojang",price:"80"},
-    {title:"Halo",studio:"Microsoft",price:"90"}
+// Permite que o Express entenda JSON no corpo das requisições
+app.use(express.json());
+
+// Lista inicial com 10 jogos
+let listaGames = [
+  { title: "The Last of Us", studio: "Naughty Dog", price: 199.90 },
+  { title: "God of War", studio: "Santa Monica studio", price: 249.90 },
+  { title: "Hollow Knight", studio: "Team Cherry", price: 39.99 },
+  { title: "Minecraft", studio: "Mojang", price: 79.90 },
+  { title: "GTA V", studio: "Rockstar", price: 89.90 },
+  { title: "Celeste", studio: "Matt Makes Games", price: 29.90 },
+  { title: "Red Dead Redemption 2", studio: "Rockstar", price: 199.90 },
+  { title: "Elden Ring", studio: "FromSoftware", price: 299.90 },
+  { title: "Fortnite", studio: "Epic Games", price: 0.00 },
+  { title: "Overwatch", studio: "Blizzard", price: 149.90 }
 ];
-app.get ('/',(req,res) =>
-    res.json(games)
- );
- app.use(express.json());
 
-app.post("/novogame",(req,res)=>
-{
-    const{index} = req.params;
-    let title = req.body.title;
-    let studio = req.body.studio;
-    let price = req.body.price;
-
-    games[index] = {title,studio,price};
-
-    return res.json(games);
+// Rota raiz (GET)
+app.get('/', (req, res) => {
+  res.send("API de Lista de Games está funcionando!");
 });
 
-app.delete("/index",(req,res)=>
-    {
-        const{index} = req.params;
-        games.splice(index,1);
-    
-        return res.json({menssage:"O jogo foi deleltado"});
-    });
+// Rota para listar os jogos (GET)
+app.get('/games', (req, res) => {
+  res.json(listaGames);
+});
+
+// Rota para adicionar novo jogo (POST)
+app.post('/novogame', (req, res) => {
+  const { title, studio, price } = req.body;
+
+  if (!title || !studio || price === undefined) {
+    return res.status(400).json({ erro: "Preencha todos os campos!" });
+  }
+
+  listaGames.push({ title, studio, price });
+  res.json({ mensagem: "Jogo adicionado com sucesso!", listaGames });
+});
+
+// Rota para editar um jogo pelo índice (PUT)
+app.put('/novogame/:index', (req, res) => {
+  const { index } = req.params;
+  let title = req.body.title;
+  let studio = req.body.studio;
+  let price = req.body.price;
+
+  listaGames[index] = {title,studio,price};
+  return res.json(listaGames);
+});
+app.delete("/:index",(req,res)=>{
+    const { index } = req.params;
+    listaGames.slice(index,1);
+    return res.json({mensagem:"O jogo foi deletado"});
+}
+);
+// Inicia o servidor
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em: http://localhost:${PORT}`);
+});
