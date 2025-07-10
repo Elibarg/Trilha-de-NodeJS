@@ -1,32 +1,40 @@
 const express = require('express');
-const bodyParser = require('body-parse')
-const path = require('path');
 const app = express();
+const path = require('path');
 
-app.engine('html',require('ejs').renderFile);
-app.set('view engine','html');
-app.use('/public',express.static(path.join(__dirname,'public')));
-app.set('views', path.join(__dirname,'views'));
+// Configurações
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extends:true
-}));
+// Lista de tarefas
+let tasksLists = ['Estudar Node', 'Fazer exercícios'];
 
-let tasks = ['Passear com o dog', 'Ir ao mercado','Comprar pão']
-
-app.get('/',(req,res)=>{
-    tasks.push(req.body.task)
-    res.render('index',{tasksLists:tasks});
+// Rota principal
+app.get('/', (req, res) => {
+    res.render('index', { tasksLists }); // <-- IMPORTANTE!
 });
-app.get('deletar/:id', (req,res)=>{
-    task = task.filter(function(val,index){
-        if(index != req.params.id){
-            return val;
-        }
-    })
-    res.render('index',{taskList:task});
-})
-app.listen(5000,()=>{
-    console.log("http://localhost:5000")
-})
+
+// Rota para adicionar tarefa
+app.post('/', (req, res) => {
+    const novaTarefa = req.body.task;
+    if (novaTarefa && novaTarefa.trim() !== '') {
+        tasksLists.push(novaTarefa);
+    }
+    res.redirect('/');
+});
+
+// Rota para deletar tarefa por índice
+app.get('/deletar/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    if (!isNaN(id) && id >= 0 && id < tasksLists.length) {
+        tasksLists.splice(id, 1);
+    }
+    res.redirect('/');
+});
+
+app.listen(5000, () => {
+    console.log("Servidor rodando em http://localhost:5000");
+});

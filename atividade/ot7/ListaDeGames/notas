@@ -1,0 +1,9 @@
+// Get: http://localhost:5000/games
+// Post: http://localhost:5000/novogame
+// put: http://localhost:5000/novogame/5
+
+//{
+//  "title": "Sekiro: Shadow",
+//  "studio": "FromSoftware",
+//  "price": 305.993
+//}

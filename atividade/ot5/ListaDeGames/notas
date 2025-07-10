@@ -1,0 +1,54 @@
+// Get: http://localhost:5000/games
+// Post: http://localhost:5000/novogame
+// npx nodemon index.js
+ 
+{ 
+    "title": "The Last of Us", 
+    "studio": "Naughty Dog", 
+    "price": 199.90 
+},
+{ 
+    "title": "God of War", 
+    "studio": "Santa Monica studio", 
+    "price": 249.90 
+},
+{ 
+    "title": "Hollow Knight", 
+    "studio": "Team Cherry", 
+    "price": 39.99 
+},
+{ 
+    "title": "Minecraft", 
+    "studio": "Mojang studios", 
+    "price": 79.90 
+},
+{ 
+    "title": "GTA V", 
+    "studio": "Rockstar Games", 
+    "price": 89.90 
+},
+{ 
+    "title": "Celeste", 
+    "studio": "Matt Makes Games", 
+    "price": 29.90 
+},
+{ 
+    "title": "Red Dead Redemption 2", 
+    "studio": "Rockstar Games", 
+    "price": 199.90 
+},
+{ 
+    "title": "Elden Ring", 
+    "studio": "FromSoftware", 
+    "price": 299.90 
+},
+{ 
+    "title": "Fortnite", 
+    "studio": "Epic Games", 
+    "price": 0.00 
+},
+{ 
+    "title": "Overwatch", 
+    "studio": "Blizzard", 
+    "price": 149.90 
+}

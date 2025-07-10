@@ -1,32 +1,35 @@
-import express from "express";
-
+// Importa o módulo Express
+const express = require('express');
 const app = express();
 
-app.listen(3080, () =>
-    console.log("Servidor iniciado na porta http://localhost:3080")
-);
+// Define a porta do servidor
+const PORT = 5000;
 
-let games=[
-    {title:"Sea of Thieves",studio:"Rare",price:"30"},
-    {title:"WOW",studio:"Blizzard",price:"120"},
-    {title:"Valorant",studio:"Riot",price:"0"},
-    {title:"COD",studio:"Activision",price:"200"},
-    {title:"Minecreft",studio:"Mojang",price:"80"},
-    {title:"Halo",studio:"Microsoft",price:"90"}
+// Cria um array com a lista de games
+const listaGames = [
+  { nome: "The Last of Us", studio: "Naughty Dog", preco: 199.90 },
+  { nome: "God of War", studio: "Santa Monica Studio", preco: 249.90 },
+  { nome: "Hollow Knight", studio: "Team Cherry", preco: 39.99 },
+  { nome: "Minecraft", studio: "Mojang Studios", preco: 79.90 },
+  { nome: "GTA V", studio: "Rockstar Games", preco: 89.90 },
+  { nome: "Celeste", studio: "Matt Makes Games", preco: 29.90 },
+  { nome: "Red Dead Redemption 2", studio: "Rockstar Games", preco: 199.90 },
+  { nome: "Elden Ring", studio: "FromSoftware", preco: 299.90 },
+  { nome: "Fortnite", studio: "Epic Games", preco: 0.00 },
+  { nome: "Overwatch", studio: "Blizzard", preco: 149.90 }
 ];
-app.get ('/',(req,res) =>
-    res.json(games)
- );
- app.use(express.json());
 
-app.post("/novogame/:index",(req,res)=>
-{
-    const{index} = req.params;
-    let title = req.body.title;
-    let studio = req.body.studio;
-    let price = req.body.price;
+// Rota principal ("/") apenas para teste
+app.get('/', (req, res) => {
+  res.send(listaGames);
+});
 
-    games[index] = {title,studio,price};
+// Rota que retorna a lista de games em formato JSON
+app.get('/games', (req, res) => {
+  res.json(listaGames);
+});
 
-    return res.json(games);
+// Inicializa o servidor
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
